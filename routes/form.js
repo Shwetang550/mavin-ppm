@@ -75,6 +75,8 @@ router.put("/:id", async (req, res) => {
                 field_name: Joi.string(),
                 field_value: Joi.string(),
                 field_type: Joi.string(),
+                isRequired: Joi.boolean().default(false),
+                dropdown_options: Joi.array().items(Joi.string())
             }),
         }),
     });
