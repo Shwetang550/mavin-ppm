@@ -27,13 +27,14 @@ router.get("/:id", async (req, res) => {
 router.post("/", async (req, res) => {
     // validating form-data
     const joiSchema = Joi.object({
-        form_name: Joi.string().min(3).required(),
+        form_name: Joi.string(),
         sections: Joi.array().items({
             section_name: Joi.string(),
             fields: Joi.array().items({
                 field_name: Joi.string(),
                 field_value: Joi.string(),
                 field_type: Joi.string(),
+                isRequired: Joi.boolean().default(false),
                 dropdown_options: Joi.array().items(Joi.string())
             }),
         }),

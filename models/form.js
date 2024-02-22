@@ -10,6 +10,7 @@ const formSchema = mongoose.Schema({
                     field_name: String,
                     field_value: String,
                     field_type: String,
+                    isRequired: Boolean,
                     dropdown_options: [String]
                 },
             ],
