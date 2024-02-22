@@ -8,7 +8,10 @@ const formRoutes = require("./routes/form");
 const app = express();
 
 app.use(express.json());
-app.use(cors);
+app.use(cors({
+    origin: "*",
+    allowedHeaders: "X-Requested-With, Content-Type, auth-token"
+}));
 app.use("/api/form", formRoutes);
 
 const port = process.env.PORT || 5000;
