@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 
 const formSchema = mongoose.Schema({
     form_name: String,
+    form_status: String,
     sections: [
         {
             section_name: String,
