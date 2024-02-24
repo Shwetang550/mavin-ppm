@@ -26,26 +26,28 @@ router.get("/:id", async (req, res) => {
 // add form into the db
 router.post("/", async (req, res) => {
     // validating form-data
-    // const joiSchema = Joi.object({
-    //     form_name: Joi.string(),
-    //     sections: Joi.array().items({
-    //         section_name: Joi.string(),
-    //         fields: Joi.array().items({
-    //             field_name: Joi.string(),
-    //             field_value: Joi.string(),
-    //             field_type: Joi.string(),
-    //             isRequired: Joi.boolean().default(false),
-    //             dropdown_options: Joi.array().items(Joi.string())
-    //         }),
-    //     }),
-    // });
+   const joiSchema = Joi.object({
+       form_name: Joi.string().min(3).required(),
+       form_status: Joi.string().default('not reviewed'),
+        sections: Joi.array().items({
+            section_name: Joi.string().min(2),
+            isReviewed: Joi.boolean().default(false),
+            fields: Joi.array().items({
+                field_name: Joi.string().allow(null, ''),
+                field_value: Joi.string().allow(null, ''),
+                field_type: Joi.string().allow(null, ''),
+                isRequired: Joi.boolean().default(false),
+                dropdown_options: Joi.array().items(Joi.string())
+            }),
+        }),
+    });
 
-    // const result = joiSchema.validate(req.body);
+    const result = joiSchema.validate(req.body);
 
-    // if (result.error) {
-    //     res.status(400).send(result.error.details[0]?.message);
-    //     return;
-    // }
+    if (result.error) {
+        res.status(400).send(result.error.details[0]?.message);
+        return;
+    }
 
     // pushing validated data to db
     const forms = new Form({
@@ -66,27 +68,29 @@ router.put("/:id", async (req, res) => {
         return;
     }
 
-    // // validating form-data
-    // const joiSchema = Joi.object({
-    //     form_name: Joi.string().min(3).required(),
-    //     sections: Joi.array().items({
-    //         section_name: Joi.string(),
-    //         fields: Joi.array().items({
-    //             field_name: Joi.string(),
-    //             field_value: Joi.string(),
-    //             field_type: Joi.string(),
-    //             isRequired: Joi.boolean().default(false),
-    //             dropdown_options: Joi.array().items(Joi.string())
-    //         }),
-    //     }),
-    // });
+    // validating form-data
+    const joiSchema = Joi.object({
+        form_name: Joi.string().min(3).required(),
+        form_status: Joi.string().default('not reviewed'),
+        sections: Joi.array().items({
+            section_name: Joi.string().min(2),
+            isReviewed: Joi.boolean().default(false),
+            fields: Joi.array().items({
+                field_name: Joi.string().allow(null, ''),
+                field_value: Joi.string().allow(null, ''),
+                field_type: Joi.string().allow(null, ''),
+                isRequired: Joi.boolean().default(false),
+                dropdown_options: Joi.array().items(Joi.string())
+            }),
+        }),
+    });
 
-    // const result = joiSchema.validate(req.body);
+    const result = joiSchema.validate(req.body);
 
-    // if (result.error) {
-    //     res.status(400).send(result.error.details[0]?.message);
-    //     return;
-    // }
+    if (result.error) {
+        res.status(400).send(result.error.details[0]?.message);
+        return;
+    }
 
     const dbResult = await Form.findByIdAndUpdate(req.params.id, {
         form_name: req.body.form_name,

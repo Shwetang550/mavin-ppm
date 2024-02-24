@@ -5,6 +5,7 @@ const formSchema = mongoose.Schema({
     sections: [
         {
             section_name: String,
+            isReviewed: Boolean,
             fields: [
                 {
                     field_name: String,
