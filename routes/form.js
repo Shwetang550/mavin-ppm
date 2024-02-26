@@ -73,7 +73,7 @@ router.put("/:id", async (req, res) => {
     // validating form-data
     const joiSchema = Joi.object({
        form_name: Joi.string().min(3).required(),
-       form_status: Joi.string().allow(null, ''),
+       form_status: Joi.string().allow(null, '').default('not reviewed'),
         sections: Joi.array().items({
             section_name: Joi.string().min(2),
             isReviewed: Joi.boolean().default(false),
