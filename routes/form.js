@@ -52,10 +52,7 @@ router.post("/", async (req, res) => {
     }
 
     // pushing validated data to db
-    const forms = new Form({
-        form_name: req.body.form_name,
-        sections: [...req.body.sections],
-    });
+    const forms = new Form(req.body);
 
     const dbResult = await forms?.save();
     res.json(forms);
@@ -96,10 +93,7 @@ router.put("/:id", async (req, res) => {
         return;
     }
 
-    const dbResult = await Form.findByIdAndUpdate(req.params.id, {
-        form_name: req.body.form_name,
-        sections: [...req.body.sections],
-    });
+    const dbResult = await Form.findByIdAndUpdate(req.params.id, req.body);
 
     res.json(dbResult);
 });
