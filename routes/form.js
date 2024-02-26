@@ -36,6 +36,8 @@ router.post("/", async (req, res) => {
                 field_name: Joi.string().allow(null, ''),
                 field_value: Joi.string().allow(null, ''),
                 field_type: Joi.string().allow(null, ''),
+                isTooltipShown: Joi.boolean().default(true),
+                tooltipMessage: Joi.string().allow(null, ''),
                 isRequired: Joi.boolean().default(false),
                 dropdown_options: Joi.array().items(Joi.string())
             }),
@@ -70,8 +72,8 @@ router.put("/:id", async (req, res) => {
 
     // validating form-data
     const joiSchema = Joi.object({
-        form_name: Joi.string().min(3).required(),
-        form_status: Joi.string().allow(null, ''),
+       form_name: Joi.string().min(3).required(),
+       form_status: Joi.string().allow(null, ''),
         sections: Joi.array().items({
             section_name: Joi.string().min(2),
             isReviewed: Joi.boolean().default(false),
@@ -79,6 +81,8 @@ router.put("/:id", async (req, res) => {
                 field_name: Joi.string().allow(null, ''),
                 field_value: Joi.string().allow(null, ''),
                 field_type: Joi.string().allow(null, ''),
+                isTooltipShown: Joi.boolean().default(true),
+                tooltipMessage: Joi.string().allow(null, ''),
                 isRequired: Joi.boolean().default(false),
                 dropdown_options: Joi.array().items(Joi.string())
             }),

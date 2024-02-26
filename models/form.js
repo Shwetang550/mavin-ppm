@@ -12,6 +12,8 @@ const formSchema = mongoose.Schema({
                     field_name: String,
                     field_value: String,
                     field_type: String,
+                    isTooltipShown: Boolean,
+                    tooltipMessage: String,
                     isRequired: Boolean,
                     dropdown_options: [String]
                 },
